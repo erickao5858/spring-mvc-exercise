@@ -30,7 +30,7 @@ public class BookService {
 	}
 
 	@Transactional
-	public void deleteBook(int id) {
+	public void deleteBook(int id){
 		bookRepository.deleteById(id);
 	}
 }

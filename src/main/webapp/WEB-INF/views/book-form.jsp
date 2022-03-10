@@ -11,6 +11,23 @@
 	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script>
+validateForm = () => {
+	if (!$("#name").val()) {
+		alert("Book Name cannot be empty.")
+		return false;
+	}
+	if (!$("#author").val()) {
+		alert("Author cannot be empty.")
+		return false;
+	}
+	let price = Number($("#price").val())
+	if (!Number.isInteger(price) || price < 0) {
+		alert("Invalid price detected.");
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 	<div class="container">
@@ -23,7 +40,7 @@
 				</div>
 				<div class="panel-body">
 					<form:form action="save" cssClass="form-horizontal" method="post"
-						modelAttribute="book">
+						modelAttribute="book" onsubmit="return validateForm()">
 						<form:hidden path="id" />
 						<div class="form-group">
 							<label for="name" class="col-md-3 control-label">Book

@@ -3,7 +3,6 @@ package com.hcl.library.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class[] { PersistenceJPAConfig.class };

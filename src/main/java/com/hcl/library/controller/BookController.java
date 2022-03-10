@@ -40,10 +40,14 @@ public class BookController {
 	}
 
 	@GetMapping("/update")
-	public String showEditForm(@RequestParam("id") int id, Model model) throws ResourceNotFoundException {
-		Book book = bookService.getBook(id);
-		model.addAttribute("book", book);
-		return "book-form";
+	public String showEditForm(@RequestParam("id") int id, Model model) {
+		try {
+			Book book = bookService.getBook(id);
+			model.addAttribute("book", book);
+			return "book-form";
+		} catch (ResourceNotFoundException e) {
+			return "books";
+		}
 	}
 
 	@PostMapping("/save")
@@ -53,7 +57,7 @@ public class BookController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteBook(@RequestParam("id") int id) throws ResourceNotFoundException {
+	public String deleteBook(@RequestParam("id") int id) {
 		bookService.deleteBook(id);
 		return "redirect:/book/";
 	}
