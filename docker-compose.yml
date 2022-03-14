@@ -1,0 +1,25 @@
+version: '3'
+services:
+  library:
+    restart: always
+    image: library:latest
+    container_name: library
+    ports:
+    - 8080:8080
+    depends_on:
+    - mysqldbserver
+  mysqldbserver:
+    image: mysql:8.0.28
+    container_name: mysqldbserver
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+    - 3306:3306
+    volumes:
+    - ~/docker/mysql/data:/var/lib/mysql
+    - ~/docker/mysql/conf:/etc/mysql/conf.d
+    - ~/docker/mysql/logs:/logs
+volumes:
+  mysql-data: null
