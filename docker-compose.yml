@@ -4,10 +4,9 @@ services:
     restart: always
     image: library:latest
     container_name: library
-    ports:
-    - 8080:8080
     depends_on:
     - mysqldbserver
+    network_mode: host
   mysqldbserver:
     image: mysql:8.0.28
     container_name: mysqldbserver
